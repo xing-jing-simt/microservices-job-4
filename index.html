@@ -42,7 +42,7 @@
           debugger;
           for (let i = 0; i < jsonresponse.length; i++) {
             let curr_row = table2.insertRow(1 + i)
-            let cols = ["id", "name", "username", "email"]
+            let cols = ["id", "name", "username", "email", "website"]
             let j = 0
             for (let j = 0; j < cols.length; j++) {
               let cell = curr_row.insertCell(j)
@@ -90,6 +90,7 @@
           <th scope="col">name</th>
           <th scope="col">username</th>
           <th scope="col">email</th>
+          <th scope="col">website</th>
         </tr>
       </thead>
       <tbody>
