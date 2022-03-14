@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kom Xing Jing - REST Client</title>
+  <script type="text/javascript">
+
+    function getBookings() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          //process response
+          let jsonresponse = JSON.parse(xhttp.response)
+          let table1 = document.getElementById("table1")
+          for (let i = 0; i < jsonresponse.length; i++) {
+            let curr_row = table1.insertRow(1 + i)
+            let cols = ["booking_id", "date", "time", "pick_up_pt", "dest", "curr_lat", "curr_long"]
+            let j = 0
+            for (let j = 0; j < cols.length; j++) {
+              let cell = curr_row.insertCell(j)
+              cell.innerHTML = jsonresponse[i][cols[j]]
+            }
+          }
+          console.log(xhttp.response);
+        }
+      };
+      //xhttp.open("GET", "http://httpbin.org/get?name=tan", true);
+      xhttp.open("GET", "http:127.0.0.1:5000/api/bookings", true)
+      xhttp.send();
+    }
+
+    function getTypicodeData() {
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          //process response
+          let jsonresponse = JSON.parse(xhttp.response)
+          let table2 = document.getElementById("table2")
+          debugger;
+          for (let i = 0; i < jsonresponse.length; i++) {
+            let curr_row = table2.insertRow(1 + i)
+            let cols = ["id", "name", "username", "email"]
+            let j = 0
+            for (let j = 0; j < cols.length; j++) {
+              let cell = curr_row.insertCell(j)
+              cell.innerHTML = jsonresponse[i][cols[j]]
+            }
+          }
+          console.log(xhttp.response);
+        }
+      };
+      //xhttp.open("GET", "http://httpbin.org/get?name=tan", true);
+      xhttp.open("GET", "https://jsonplaceholder.typicode.com/users", true)
+      xhttp.send();
+    }
+  </script>
+</head>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+
+  <div>
+    <button onclick="getBookings()">Get Bookings</button>
+    <button onclick="getTypicodeData()">Get Typicode Data</button>
+  </div>
+  <div class="container">
+    <table class="table" id="table1">
+      <thead>
+        <th scope="col">#Booking ID</th>
+        <th scope="col">Date</th>
+        <th scope="col">Time</th>
+        <th scope="col">Pick up point</th>
+        <th scope="col">Destination</th>
+        <th scope="col">Current latitude</th>
+        <th scope="col">Current longitude</th>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+    <table class="table" id="table2">
+      <thead>
+        <tr>
+          <th scope="col">#id</th>
+          <th scope="col">name</th>
+          <th scope="col">username</th>
+          <th scope="col">email</th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+
+</body>
+
+</html>
